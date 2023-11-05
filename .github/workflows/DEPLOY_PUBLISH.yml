@@ -26,7 +26,7 @@ jobs:
         committer_name: jaesung-0o0
         commit_message: 블로그 컨텐츠를 업데이트 했습니다.
       env:
-        GITHUB_PAT: ${{ secrets.REPO_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 커밋
       uses: EndBug/add-and-commit@v4.0.1
