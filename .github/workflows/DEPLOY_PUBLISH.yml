@@ -1,0 +1,35 @@
+name: Deploy Publish
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Generate blog
+      run: swift run blog
+    
+    - name: Publish in GitHub Pages repository
+      uses: crazy-max/ghaction-github-pages@v1.4.0
+      with:
+        repo: jaesung-0o0/blog
+        target_branch: main
+        keep_history: true
+        allow_empty_commit: false
+        build_dir: Output
+        committer_name: jaesung-0o0
+        commit_message: 블로그 컨텐츠를 업데이트 했습니다.
+      env:
+        GITHUB_PAT: ${{ secrets.REPO_TOKEN }}
+
+    - name: 커밋
+      uses: EndBug/add-and-commit@v4.0.1
+      with:
+        author_name: yourname
+        message: Commit new output
